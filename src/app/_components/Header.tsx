@@ -3,12 +3,16 @@ import React from "react";
 import { MenuOption } from "../utils/MenuOption";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { SignInButton } from "@clerk/nextjs";
 
 export default function Header() {
   return (
-    <div className="flex justify-between items-center gap-4 w-full shadow p-2 " style={{
-      background:"var(--neutral)"
-    }}>
+    <div
+      className="flex justify-between items-center gap-4 w-full shadow p-2 "
+      style={{
+        background: "var(--neutral)",
+      }}
+    >
       {/* logo */}
       <div className="flex items-center w-[200px] justify-center gap-2 ">
         <p className="font-bold text-3xl">Logo</p>
@@ -31,9 +35,11 @@ export default function Header() {
       </div>
       {/* get started button */}
       <div>
-        <Button>
-          Get Started <ArrowRight />
-        </Button>
+        <SignInButton mode="modal" forceRedirectUrl={"/workspace"}>
+          <Button>
+            Get Started <ArrowRight />
+          </Button>
+        </SignInButton>
       </div>
     </div>
   );

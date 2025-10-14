@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUp, icons, ImagePlus } from "lucide-react";
 import React, { useState } from "react";
 import { suggestion } from "../utils/SuggestionOption";
+import { SignInButton } from "@clerk/nextjs";
 
 export default function Hero() {
   const [userInput, setUserInput] = useState<string>();
@@ -29,9 +30,11 @@ export default function Hero() {
           <Button variant={"ghost"} size={"icon"}>
             <ImagePlus />
           </Button>
-          <Button>
-            <ArrowUp />
-          </Button>
+          <SignInButton mode="modal" forceRedirectUrl={"/workspace"}>
+            <Button disabled={!userInput}>
+              <ArrowUp />
+            </Button>
+          </SignInButton>
         </div>
       </div>
       {/* suggestion list */}
