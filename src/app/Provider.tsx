@@ -19,7 +19,7 @@ export default function Provider({ children }: ProviderType) {
     };
     createNewUser();
   }, []);
-  console.log(userDetail);
+
 
   return (
     <div>

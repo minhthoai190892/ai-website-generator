@@ -1,11 +1,13 @@
-import Image from "next/image";
+"use client";
 import React from "react";
 import { MenuOption } from "../utils/MenuOption";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { SignInButton } from "@clerk/nextjs";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function Header() {
+  const user = useUser();
   return (
     <div
       className="flex justify-between items-center gap-4 w-full shadow p-2 "
@@ -35,11 +37,20 @@ export default function Header() {
       </div>
       {/* get started button */}
       <div>
-        <SignInButton mode="modal" forceRedirectUrl={"/workspace"}>
-          <Button>
-            Get Started <ArrowRight />
-          </Button>
-        </SignInButton>
+        {!user ? (
+          <SignInButton mode="modal" forceRedirectUrl={"/workspace"}>
+            <Button>
+              Get Started <ArrowRight />
+            </Button>
+          </SignInButton>
+        ) : (
+          <Link href={"/workspace"}>
+            <Button>
+              Get Started <ArrowRight />
+            </Button>
+          </Link>
+        )}
+        <UserButton />
       </div>
     </div>
   );
