@@ -50,7 +50,6 @@ export default function Header() {
             </Button>
           </Link>
         )}
-        <UserButton />
       </div>
     </div>
   );

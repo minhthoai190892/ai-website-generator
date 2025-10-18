@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import React from "react";
 import { WorkspaceAppSidebar } from "./_components/WorkspaceAppSidebar";
 import WorkspaceHeader from "./_components/WorkspaceHeader";

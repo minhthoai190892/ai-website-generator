@@ -1,12 +1,43 @@
 import { relations } from "drizzle-orm";
-import { boolean, integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  integer,
+  pgTable,
+  timestamp,
+  varchar,json
+} from "drizzle-orm/pg-core";
+
 export const usersTable = pgTable("users", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar({ length: 255 }).notNull(),
-  credits: integer().default(2).notNull(),
-  email: varchar({ length: 255 }).notNull().unique(),
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name", { length: 255 }).notNull(),
+  credits: integer("credits").default(2).notNull(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
 });
 
+export const projectTable = pgTable("projects", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  projectId: varchar("project_id"),
+  createBy: varchar("create_by")
+    .references(() => usersTable.email)
+    .notNull(),
+  createdOn: timestamp("created_on").defaultNow(),
+});
+export const frameTable = pgTable("frames", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  frameId: varchar("frame_id"),
+  projectId: varchar("project_id")
+    .references(() => projectTable.projectId)
+    .notNull(),
+  createdOn: timestamp("created_on").defaultNow(),
+});
+export const chatTable = pgTable("chats", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  createBy: varchar("create_by")
+    .references(() => usersTable.email)
+    .notNull(),
+  createdOn: timestamp("created_on").defaultNow(),
+  chatMessage: json("chat_message"),
+});
 export const sectionsTable = pgTable("sections", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
 
