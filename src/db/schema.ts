@@ -4,7 +4,9 @@ import {
   integer,
   pgTable,
   timestamp,
-  varchar,json
+  varchar,
+  json,
+  text,
 } from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
@@ -25,6 +27,7 @@ export const projectTable = pgTable("projects", {
 export const frameTable = pgTable("frames", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   frameId: varchar("frame_id"),
+  designCode: text(),
   projectId: varchar("project_id")
     .references(() => projectTable.projectId)
     .notNull(),
@@ -32,6 +35,7 @@ export const frameTable = pgTable("frames", {
 });
 export const chatTable = pgTable("chats", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  frameId: varchar("frameId").references(() => frameTable.frameId),
   createBy: varchar("create_by")
     .references(() => usersTable.email)
     .notNull(),

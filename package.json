@@ -7,7 +7,8 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "dev:all": "concurrently \"npm run dev \"  "
+    "drizzle": "npx drizzle-kit push",
+    "dev:all": "concurrently \"npm run dev \"  \"npx drizzle-kit push\""
   },
   "dependencies": {
     "@clerk/nextjs": "^6.33.3",
